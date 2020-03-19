@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/Game"
+        app:showAsAction="ifRoom|withText"
+        android:icon="@drawable/ic_game"
+        android:title="Joc">
+    </item>
+    <item
+        android:id="@+id/Tots"
+        app:showAsAction="never"
+        android:title="All">
+    </item>
+    <item
+        android:id="@+id/Liquids"
+        app:showAsAction="never"
+        android:title="Liquids">
+    </item>
+    <item
+        android:id="@+id/Gasos"
+        app:showAsAction="never"
+        android:title="Gases">
+    </item>
+    <item
+        android:id="@+id/Solids"
+        app:showAsAction="never"
+        android:title="Solids">
+    </item>
+</menu>

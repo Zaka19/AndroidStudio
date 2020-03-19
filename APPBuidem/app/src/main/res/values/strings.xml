@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">APPBuidem</string>
+    <string name="Zonas">Zonas</string>
+    <string name="TipoMaquinas">T.Maquinas</string>
+    <string name="Maquinas">Maquinas</string>
+    <string name="Mapa">GMap</string>
+</resources>

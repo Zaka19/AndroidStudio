@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_maquinas">
+    <fragment
+        android:id="@+id/navigation_maquinas"
+        android:name="com.example.buidemapp.ui.Maquinas.MaquinaFragment"
+        android:label="@string/title_maquinas"
+        tools:layout="@layout/fragment_maquinas" />
+    <fragment
+        android:id="@+id/navigation_tiposmaquinas"
+        android:name="com.example.buidemapp.ui.TipoMaquinas.TipoMaquinasFragment"
+        android:label="@string/title_tipomaquinas"
+        tools:layout="@layout/fragment_tipomaquina" />
+    <fragment
+        android:id="@+id/navigation_zonas"
+        android:name="com.example.buidemapp.ui.Zonas.ZonaFragment"
+        android:label="@string/title_zonas"
+        tools:layout="@layout/fragment_zona" />
+    <fragment
+        android:id="@+id/navigation_mapa"
+        android:name="com.example.buidemapp.ui.Mapa.MapaFragment"
+        android:label="@string/title_gmaps"
+        tools:layout="@layout/fragment_mapa" />
+</navigation>

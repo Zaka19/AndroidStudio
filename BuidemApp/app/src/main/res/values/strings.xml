@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BuidemApp</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_maquinas">Maquinas</string>
+    <string name="title_zonas">Zonas</string>
+    <string name="title_tipomaquinas">Tipo de maquinas</string>
+    <string name="title_gmaps">Mapa</string>
+</resources>

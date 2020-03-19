@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MiPrimeraApp</string>
+    <string name="tvHelloWorld">Hello World!</string>
+</resources>
