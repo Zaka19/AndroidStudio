@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -66,7 +67,7 @@ public class CRUDTipoMaquinas extends AppCompatActivity {
         _edtColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _color.ColorDialog(v.getContext(), _edtColor, _tvColorSelected);
+                _color.ColorDialog(v.getContext(), _edtColor);
             }
         });
 
@@ -92,8 +93,8 @@ public class CRUDTipoMaquinas extends AppCompatActivity {
             return;
         }
 
-        if(!_edtColor.getText().toString().isEmpty()){
-            _color = _edtColor.getText().toString();
+        if(!_edtColor.getHint().toString().isEmpty()){
+            _color = _edtColor.getHint().toString();
         }
         else{
             return;
@@ -106,7 +107,6 @@ public class CRUDTipoMaquinas extends AppCompatActivity {
                 snackBar.show();
                 return;
             }
-
             id = _data.PostTiposMaquinas(_name, _color);
         }
         else{
@@ -125,9 +125,9 @@ public class CRUDTipoMaquinas extends AppCompatActivity {
         setTitle(_cursorToUpdate.getString(_cursorToUpdate.getColumnIndexOrThrow(Datasource.TIPOMAQUINAS_NOMBRE)));
 
         _edtName.setText(_cursorToUpdate.getString(_cursorToUpdate.getColumnIndexOrThrow(Datasource.TIPOMAQUINAS_NOMBRE)));
-        _edtColor.setText(_cursorToUpdate.getString(_cursorToUpdate.getColumnIndexOrThrow(Datasource.TIPOMAQUINAS_COLOR)));
-        _edtColor.setTextColor(Color.parseColor(_cursorToUpdate.getString(_cursorToUpdate.getColumnIndexOrThrow(Datasource.TIPOMAQUINAS_COLOR))));
-        _tvColorSelected.setBackgroundColor(Color.parseColor(_cursorToUpdate.getString(_cursorToUpdate.getColumnIndexOrThrow(Datasource.TIPOMAQUINAS_COLOR))));
+        _edtColor.setHint(_cursorToUpdate.getString(_cursorToUpdate.getColumnIndexOrThrow(Datasource.TIPOMAQUINAS_COLOR)));
+        //_edtColor.setTextColor(Color.parseColor(_cursorToUpdate.getString(_cursorToUpdate.getColumnIndexOrThrow(Datasource.TIPOMAQUINAS_COLOR))));
+        _edtColor.setBackgroundColor(Color.parseColor(_cursorToUpdate.getString(_cursorToUpdate.getColumnIndexOrThrow(Datasource.TIPOMAQUINAS_COLOR))));
 
         _cursorToUpdate.close();
     }

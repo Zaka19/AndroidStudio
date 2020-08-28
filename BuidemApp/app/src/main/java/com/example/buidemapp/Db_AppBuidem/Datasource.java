@@ -14,6 +14,7 @@ import com.example.buidemapp.ui.TipoMaquinas.TipoDeMaquina;
 import com.example.buidemapp.ui.Zonas.Zona;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Datasource {
     public static final String TODASTABLAS_ID = "_id";
@@ -40,30 +41,30 @@ public class Datasource {
     private Helper _helper;
     private SQLiteDatabase _reader, _writter;
 
-    public Datasource(Context _context){
+    public Datasource(Context _context) {
         _helper = new Helper(_context);
         open();
     }
 
-    public void open(){
+    public void open() {
         _reader = _helper.getReadableDatabase();
         _writter = _helper.getWritableDatabase();
     }
 
-    public void close(){
+    public void close() {
         _reader.close();
         _writter.close();
     }
 
     //GETTERS
 
-    public Cursor GetZonas(){
+    public Cursor GetZonas() {
         return _reader.query(ZONAS, new String[]{TODASTABLAS_ID, ZONAS_NOMBRE},
                 null, null,
                 null, null, TODASTABLAS_ID);
     }
 
-    public ArrayList<Zona> GetZonasList(){
+    public ArrayList<Zona> GetZonasList() {
         ArrayList<Zona> _zonas = new ArrayList<>();
 
         Cursor _cursor = _reader.query(ZONAS, new String[]{TODASTABLAS_ID, ZONAS_NOMBRE},
@@ -71,7 +72,7 @@ public class Datasource {
                 null, null, TODASTABLAS_ID);
         _cursor.moveToFirst();
 
-        while(!_cursor.isAfterLast()) {
+        while (!_cursor.isAfterLast()) {
             _zonas.add(new Zona(_cursor.getInt(_cursor.getColumnIndex(TODASTABLAS_ID)), _cursor.getString(_cursor.getColumnIndex(ZONAS_NOMBRE))));
             _cursor.moveToNext();
         }
@@ -79,20 +80,20 @@ public class Datasource {
         return _zonas;
     }
 
-    public Cursor GetTipoMaquinas(){
+    public Cursor GetTipoMaquinas() {
         return _reader.query(TIPOMAQUINAS, new String[]{TODASTABLAS_ID, TIPOMAQUINAS_NOMBRE, TIPOMAQUINAS_COLOR},
                 null, null,
                 null, null, TODASTABLAS_ID);
     }
 
-    public ArrayList<TipoDeMaquina> GetTipoMaquinasList(){
+    public ArrayList<TipoDeMaquina> GetTipoMaquinasList() {
         ArrayList<TipoDeMaquina> _tipoMaquinas = new ArrayList<>();
         Cursor _cursor = _reader.query(TIPOMAQUINAS, new String[]{TODASTABLAS_ID, TIPOMAQUINAS_NOMBRE, TIPOMAQUINAS_COLOR},
                 null, null,
                 null, null, TODASTABLAS_ID);
         _cursor.moveToFirst();
 
-        while(!_cursor.isAfterLast()) {
+        while (!_cursor.isAfterLast()) {
             _tipoMaquinas.add(new TipoDeMaquina(_cursor.getInt(_cursor.getColumnIndex(TODASTABLAS_ID)), _cursor.getString(_cursor.getColumnIndex(TIPOMAQUINAS_NOMBRE)), _cursor.getString(_cursor.getColumnIndex(TIPOMAQUINAS_COLOR))));
             _cursor.moveToNext();
         }
@@ -101,7 +102,7 @@ public class Datasource {
         return _tipoMaquinas;
     }
 
-    public Cursor GetMaquinas(){
+    public Cursor GetMaquinas() {
         return _reader.query(MAQUINAS, new String[]{TODASTABLAS_ID, MAQUINAS_NOMBRECLIENTE, MAQUINAS_DIRECCION, MAQUINAS_CODIGOPOSTAL, MAQUINAS_POBLACION, MAQUINAS_TELEFONO, MAQUINAS_EMAIL, MAQUINAS_NUMEROSERIE, MAQUINAS_FECHA, MAQUINAS_TIPOMAQUINA, MAQUINAS_ZONA},
                 null, null,
                 null, null, TODASTABLAS_ID);
@@ -113,7 +114,7 @@ public class Datasource {
         ContentValues values = new ContentValues();
         values.put(ZONAS_NOMBRE, _name);
 
-        return _writter.insert(ZONAS,null,values);
+        return _writter.insert(ZONAS, null, values);
     }
 
     public long PostTiposMaquinas(String _name, String _color) {
@@ -121,7 +122,7 @@ public class Datasource {
         values.put(TIPOMAQUINAS_NOMBRE, _name);
         values.put(TIPOMAQUINAS_COLOR, _color);
 
-        return _writter.insert(TIPOMAQUINAS,null,values);
+        return _writter.insert(TIPOMAQUINAS, null, values);
     }
 
     public long PostMaquinas(Maquina _maquina) {
@@ -138,7 +139,7 @@ public class Datasource {
         values.put(MAQUINAS_TIPOMAQUINA, _maquina.get_tipoMaquina());
         values.put(MAQUINAS_ZONA, _maquina.get_zonaMaquina());
 
-        return _writter.insert(MAQUINAS,null,values);
+        return _writter.insert(MAQUINAS, null, values);
     }
 
     //PUTS
@@ -147,7 +148,7 @@ public class Datasource {
         ContentValues values = new ContentValues();
         values.put(ZONAS_NOMBRE, _name);
 
-        _writter.update(ZONAS,values, TODASTABLAS_ID + " = ?", new String[] { String.valueOf(_id) });
+        _writter.update(ZONAS, values, TODASTABLAS_ID + " = ?", new String[]{String.valueOf(_id)});
     }
 
     public void PutTipoMaquinas(long _id, String _name, String _color) {
@@ -155,7 +156,7 @@ public class Datasource {
         values.put(TIPOMAQUINAS_NOMBRE, _name);
         values.put(TIPOMAQUINAS_COLOR, _color);
 
-        _writter.update(TIPOMAQUINAS,values, TODASTABLAS_ID + " =?", new String[] { String.valueOf(_id) });
+        _writter.update(TIPOMAQUINAS, values, TODASTABLAS_ID + " =?", new String[]{String.valueOf(_id)});
     }
 
     public void PutMaquinas(long _id, Maquina _maquina) {
@@ -171,45 +172,44 @@ public class Datasource {
         values.put(MAQUINAS_TIPOMAQUINA, _maquina.get_tipoMaquina());
         values.put(MAQUINAS_ZONA, _maquina.get_zonaMaquina());
 
-        _writter.update(MAQUINAS,values, TODASTABLAS_ID + " = ?", new String[] { String.valueOf(_id) });
+        _writter.update(MAQUINAS, values, TODASTABLAS_ID + " = ?", new String[]{String.valueOf(_id)});
     }
 
     //DELETES
 
-    public void DeleteZonas(long _id){
-        _writter.delete(ZONAS,TODASTABLAS_ID + " = ? ", new String[]{ String.valueOf(_id) });
+    public void DeleteZonas(long _id) {
+        _writter.delete(ZONAS, TODASTABLAS_ID + " = ? ", new String[]{String.valueOf(_id)});
     }
 
-    public void DeleteTipoMaquinas(long _id){
-        _writter.delete(TIPOMAQUINAS,TODASTABLAS_ID + " = ? ", new String[]{ String.valueOf(_id) });
+    public void DeleteTipoMaquinas(long _id) {
+        _writter.delete(TIPOMAQUINAS, TODASTABLAS_ID + " = ? ", new String[]{String.valueOf(_id)});
     }
 
-    public void DeleteMaquinas(long _id){
-        _writter.delete(MAQUINAS,TODASTABLAS_ID + " = ? ", new String[]{ String.valueOf(_id) });
+    public void DeleteMaquinas(long _id) {
+        _writter.delete(MAQUINAS, TODASTABLAS_ID + " = ? ", new String[]{String.valueOf(_id)});
     }
 
     //QUERY'S
 
-    public boolean SearchNameEqualsZona(String name){
-        boolean x = false;
-
-       Cursor _cursor = _reader.query(ZONAS, new String[]{TODASTABLAS_ID, ZONAS_NOMBRE},
-               ZONAS_NOMBRE + "=?", new String[]{ name },
-                null, null, TODASTABLAS_ID);
-       _cursor.moveToFirst();
-
-        x = _cursor.getCount() <= 0 ? false : true;
-
-       _cursor.close();
-
-       return x;
-    }
-
-    public boolean SearchNameEqualsTipoMaquinas(String name){
-        boolean x =  false;
+    public String SearchColorByIdOfTypeMachine(int id) {
+        String color = "#";
 
         Cursor _cursor = _reader.query(TIPOMAQUINAS, new String[]{TODASTABLAS_ID, TIPOMAQUINAS_NOMBRE, TIPOMAQUINAS_COLOR},
-                TIPOMAQUINAS_NOMBRE + "=?", new String[]{ name },
+                TODASTABLAS_ID + "=?", new String[]{String.valueOf(id)},
+                null, null, TODASTABLAS_ID);
+        _cursor.moveToFirst();
+
+        color += _cursor.getString(_cursor.getColumnIndexOrThrow(Datasource.TIPOMAQUINAS_COLOR)).substring(3);
+        _cursor.close();
+
+        return color;
+    }
+
+    public boolean SearchNameEqualsZona(String name) {
+        boolean x = false;
+
+        Cursor _cursor = _reader.query(ZONAS, new String[]{TODASTABLAS_ID, ZONAS_NOMBRE},
+                ZONAS_NOMBRE + "=?", new String[]{name},
                 null, null, TODASTABLAS_ID);
         _cursor.moveToFirst();
 
@@ -220,13 +220,28 @@ public class Datasource {
         return x;
     }
 
-    public boolean SearchNameEqualsMaquina(String name){
+    public boolean SearchNameEqualsTipoMaquinas(String name) {
+        boolean x = false;
+
+        Cursor _cursor = _reader.query(TIPOMAQUINAS, new String[]{TODASTABLAS_ID, TIPOMAQUINAS_NOMBRE, TIPOMAQUINAS_COLOR},
+                TIPOMAQUINAS_NOMBRE + "=?", new String[]{name},
+                null, null, TODASTABLAS_ID);
+        _cursor.moveToFirst();
+
+        x = _cursor.getCount() <= 0 ? false : true;
+
+        _cursor.close();
+
+        return x;
+    }
+
+    public boolean SearchNameEqualsMaquina(String name) {
         boolean x = false;
 
         Cursor _cursorMachine = _reader.query(MAQUINAS, new String[]{TODASTABLAS_ID, MAQUINAS_NOMBRECLIENTE, MAQUINAS_DIRECCION,
                         MAQUINAS_CODIGOPOSTAL, MAQUINAS_POBLACION, MAQUINAS_TELEFONO, MAQUINAS_EMAIL, MAQUINAS_NUMEROSERIE,
                         MAQUINAS_FECHA, MAQUINAS_TIPOMAQUINA, MAQUINAS_ZONA},
-                MAQUINAS_NUMEROSERIE + "=?", new String[]{ name },
+                MAQUINAS_NUMEROSERIE + "=?", new String[]{name},
                 null, null, TODASTABLAS_ID);
         _cursorMachine.moveToFirst();
 
@@ -236,20 +251,19 @@ public class Datasource {
         return x;
     }
 
-    public boolean SearchNameEqualsMaquina(String name, long id){
+    public boolean SearchNameEqualsMaquina(String name, long id) {
         boolean x = false;
 
         Cursor _cursorMachine = _reader.query(MAQUINAS, new String[]{TODASTABLAS_ID, MAQUINAS_NOMBRECLIENTE, MAQUINAS_DIRECCION,
                         MAQUINAS_CODIGOPOSTAL, MAQUINAS_POBLACION, MAQUINAS_TELEFONO, MAQUINAS_EMAIL, MAQUINAS_NUMEROSERIE,
                         MAQUINAS_FECHA, MAQUINAS_TIPOMAQUINA, MAQUINAS_ZONA},
-                MAQUINAS_NUMEROSERIE + "=?", new String[]{ name },
+                MAQUINAS_NUMEROSERIE + "=?", new String[]{name},
                 null, null, TODASTABLAS_ID);
         _cursorMachine.moveToFirst();
 
-        if(_cursorMachine.getCount() > 0) {
+        if (_cursorMachine.getCount() > 0) {
             x = id == _cursorMachine.getInt(_cursorMachine.getColumnIndexOrThrow(TODASTABLAS_ID)) ? false : true;
-        }
-        else{
+        } else {
             x = false;
         }
 
@@ -257,50 +271,73 @@ public class Datasource {
         return x;
     }
 
-    public Cursor SearchByIdTypeMachine(long id){
-        return _reader.query(TIPOMAQUINAS, new String[]{TODASTABLAS_ID, TIPOMAQUINAS_NOMBRE, TIPOMAQUINAS_COLOR},
-                TODASTABLAS_ID + "=?", new String[]{ String.valueOf(id) },
-                null, null, TODASTABLAS_ID);
-    }
-
-    public Cursor SearchByIdZone(long id){
-        return _reader.query(ZONAS, new String[]{TODASTABLAS_ID, ZONAS_NOMBRE},
-                TODASTABLAS_ID + "=?", new String[]{ String.valueOf(id) },
-                null, null, TODASTABLAS_ID);
-    }
-
-    public Maquina SearchByIdMachine(long id){
+    public Maquina SearchByIdMachine(long id) {
         Cursor _cursorMachine = _reader.query(MAQUINAS, new String[]{TODASTABLAS_ID, MAQUINAS_NOMBRECLIENTE, MAQUINAS_DIRECCION,
                         MAQUINAS_CODIGOPOSTAL, MAQUINAS_POBLACION, MAQUINAS_TELEFONO, MAQUINAS_EMAIL, MAQUINAS_NUMEROSERIE,
                         MAQUINAS_FECHA, MAQUINAS_TIPOMAQUINA, MAQUINAS_ZONA},
-                TODASTABLAS_ID + "=?", new String[]{ String.valueOf(id) },
+                TODASTABLAS_ID + "=?", new String[]{String.valueOf(id)},
                 null, null, TODASTABLAS_ID);
         _cursorMachine.moveToFirst();
 
-            Maquina _machine = new Maquina(String.valueOf(_cursorMachine.getInt(_cursorMachine.getColumnIndexOrThrow(TODASTABLAS_ID))),_cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_NOMBRECLIENTE)),
-                    _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_DIRECCION)),  _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_CODIGOPOSTAL)),
-                    _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_POBLACION)),  _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_TELEFONO)),
-                    _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_EMAIL)), _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_NUMEROSERIE)),
-                    _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_FECHA)), _cursorMachine.getInt(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_TIPOMAQUINA)),
-                    _cursorMachine.getInt(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_ZONA)));
+        Maquina _machine = new Maquina(String.valueOf(_cursorMachine.getInt(_cursorMachine.getColumnIndexOrThrow(TODASTABLAS_ID))), _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_NOMBRECLIENTE)),
+                _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_DIRECCION)), _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_CODIGOPOSTAL)),
+                _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_POBLACION)), _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_TELEFONO)),
+                _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_EMAIL)), _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_NUMEROSERIE)),
+                _cursorMachine.getString(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_FECHA)), _cursorMachine.getInt(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_TIPOMAQUINA)),
+                _cursorMachine.getInt(_cursorMachine.getColumnIndexOrThrow(MAQUINAS_ZONA)));
 
-            _cursorMachine.close();
-            return _machine;
+        _cursorMachine.close();
+        return _machine;
     }
 
-    public Cursor SearchTypeMachineInMachine(long id){
-        return _reader.query(MAQUINAS, new String[]{TODASTABLAS_ID, MAQUINAS_NOMBRECLIENTE, MAQUINAS_DIRECCION,
-                        MAQUINAS_CODIGOPOSTAL, MAQUINAS_POBLACION, MAQUINAS_TELEFONO, MAQUINAS_EMAIL, MAQUINAS_NUMEROSERIE,
-                        MAQUINAS_FECHA, MAQUINAS_TIPOMAQUINA, MAQUINAS_ZONA},
-                MAQUINAS_TIPOMAQUINA + "=?", new String[]{ String.valueOf(id) },
+    public ArrayList<Maquina> SearchMachinesByIdZone (int idZone){
+        ArrayList<Maquina> _machines = new ArrayList<>();
+
+        Cursor _cursor = _reader.query(MAQUINAS, new String[]{TODASTABLAS_ID, MAQUINAS_NOMBRECLIENTE, MAQUINAS_DIRECCION, MAQUINAS_CODIGOPOSTAL, MAQUINAS_POBLACION, MAQUINAS_TELEFONO, MAQUINAS_EMAIL, MAQUINAS_NUMEROSERIE, MAQUINAS_FECHA, MAQUINAS_TIPOMAQUINA, MAQUINAS_ZONA},
+                MAQUINAS_ZONA + "=?", new String[]{String.valueOf(idZone)},
+                null, null, TODASTABLAS_ID);
+
+        _cursor.moveToFirst();
+
+        while (!_cursor.isAfterLast()) {
+            _machines.add(new Maquina(String.valueOf(_cursor.getInt(_cursor.getColumnIndexOrThrow(Datasource.TODASTABLAS_ID))),_cursor.getString(_cursor.getColumnIndexOrThrow(Datasource.MAQUINAS_NOMBRECLIENTE)),
+                    _cursor.getString(_cursor.getColumnIndexOrThrow(Datasource.MAQUINAS_DIRECCION)),  _cursor.getString(_cursor.getColumnIndexOrThrow(Datasource.MAQUINAS_CODIGOPOSTAL)),
+                    _cursor.getString(_cursor.getColumnIndexOrThrow(Datasource.MAQUINAS_POBLACION)),  _cursor.getString(_cursor.getColumnIndexOrThrow(Datasource.MAQUINAS_TELEFONO)),
+                    _cursor.getString(_cursor.getColumnIndexOrThrow(Datasource.MAQUINAS_EMAIL)), _cursor.getString(_cursor.getColumnIndexOrThrow(Datasource.MAQUINAS_NUMEROSERIE)),
+                    _cursor.getString(_cursor.getColumnIndexOrThrow(Datasource.MAQUINAS_FECHA)), _cursor.getInt(_cursor.getColumnIndexOrThrow(Datasource.MAQUINAS_TIPOMAQUINA)),
+                    _cursor.getInt(_cursor.getColumnIndexOrThrow(Datasource.MAQUINAS_ZONA))));
+            _cursor.moveToNext();
+        }
+        _cursor.close();
+
+        return _machines;
+    }
+
+    public Cursor SearchByIdTypeMachine(long id) {
+        return _reader.query(TIPOMAQUINAS, new String[]{TODASTABLAS_ID, TIPOMAQUINAS_NOMBRE, TIPOMAQUINAS_COLOR},
+                TODASTABLAS_ID + "=?", new String[]{String.valueOf(id)},
                 null, null, TODASTABLAS_ID);
     }
 
-    public Cursor SearchZoneInMachine(long id){
+    public Cursor SearchByIdZone(long id) {
+        return _reader.query(ZONAS, new String[]{TODASTABLAS_ID, ZONAS_NOMBRE},
+                TODASTABLAS_ID + "=?", new String[]{String.valueOf(id)},
+                null, null, TODASTABLAS_ID);
+    }
+
+    public Cursor SearchTypeMachineInMachine(long id) {
         return _reader.query(MAQUINAS, new String[]{TODASTABLAS_ID, MAQUINAS_NOMBRECLIENTE, MAQUINAS_DIRECCION,
                         MAQUINAS_CODIGOPOSTAL, MAQUINAS_POBLACION, MAQUINAS_TELEFONO, MAQUINAS_EMAIL, MAQUINAS_NUMEROSERIE,
                         MAQUINAS_FECHA, MAQUINAS_TIPOMAQUINA, MAQUINAS_ZONA},
-                MAQUINAS_ZONA + "=?", new String[]{ String.valueOf(id) },
+                MAQUINAS_TIPOMAQUINA + "=?", new String[]{String.valueOf(id)},
+                null, null, TODASTABLAS_ID);
+    }
+
+    public Cursor SearchZoneInMachine(long id) {
+        return _reader.query(MAQUINAS, new String[]{TODASTABLAS_ID, MAQUINAS_NOMBRECLIENTE, MAQUINAS_DIRECCION,
+                        MAQUINAS_CODIGOPOSTAL, MAQUINAS_POBLACION, MAQUINAS_TELEFONO, MAQUINAS_EMAIL, MAQUINAS_NUMEROSERIE,
+                        MAQUINAS_FECHA, MAQUINAS_TIPOMAQUINA, MAQUINAS_ZONA},
+                MAQUINAS_ZONA + "=?", new String[]{String.valueOf(id)},
                 null, null, TODASTABLAS_ID);
     }
 
@@ -334,29 +371,29 @@ public class Datasource {
         return id;
     }*/
 
-    public Cursor FilterMachinesToSerieCode(String _filter){
+    public Cursor FilterMachinesToSerieCode(String _filter) {
         /*return _reader.query(MAQUINAS, new String[]{TODASTABLAS_ID, MAQUINAS_NOMBRECLIENTE, MAQUINAS_DIRECCION,
                         MAQUINAS_CODIGOPOSTAL, MAQUINAS_POBLACION, MAQUINAS_TELEFONO, MAQUINAS_EMAIL, MAQUINAS_NUMEROSERIE,
                         MAQUINAS_FECHA, MAQUINAS_TIPOMAQUINA, MAQUINAS_ZONA},
                 MAQUINAS_NUMEROSERIE + " LIKE ? ", new String[]{ "%" + String.valueOf(_filter) + "%" },
                 null, null, TODASTABLAS_ID);*/
         Log.d("filtro", _filter);
-        return _reader.rawQuery("select * from " + MAQUINAS + " where " + MAQUINAS_NUMEROSERIE + " LIKE '%" +  _filter + "%' order by " + TODASTABLAS_ID , null);
+        return _reader.rawQuery("select * from " + MAQUINAS + " where " + MAQUINAS_NUMEROSERIE + " LIKE '%" + _filter + "%' order by " + TODASTABLAS_ID, null);
     }
 
-    public Cursor OrderByClientName(){
+    public Cursor OrderByClientName() {
         return _reader.query(MAQUINAS, new String[]{TODASTABLAS_ID, MAQUINAS_NOMBRECLIENTE, MAQUINAS_DIRECCION, MAQUINAS_CODIGOPOSTAL, MAQUINAS_POBLACION, MAQUINAS_TELEFONO, MAQUINAS_EMAIL, MAQUINAS_NUMEROSERIE, MAQUINAS_FECHA, MAQUINAS_TIPOMAQUINA, MAQUINAS_ZONA},
                 null, null,
                 null, null, MAQUINAS_NOMBRECLIENTE);
     }
 
-    public Cursor OrderByDateLastRevision(){
+    public Cursor OrderByDateLastRevision() {
         return _reader.query(MAQUINAS, new String[]{TODASTABLAS_ID, MAQUINAS_NOMBRECLIENTE, MAQUINAS_DIRECCION, MAQUINAS_CODIGOPOSTAL, MAQUINAS_POBLACION, MAQUINAS_TELEFONO, MAQUINAS_EMAIL, MAQUINAS_NUMEROSERIE, MAQUINAS_FECHA, MAQUINAS_TIPOMAQUINA, MAQUINAS_ZONA},
                 null, null,
                 null, null, MAQUINAS_FECHA);
     }
 
-    public Cursor OrderByAddress(){
+    public Cursor OrderByAddress() {
         return _reader.query(MAQUINAS, new String[]{TODASTABLAS_ID, MAQUINAS_NOMBRECLIENTE, MAQUINAS_DIRECCION, MAQUINAS_CODIGOPOSTAL, MAQUINAS_POBLACION, MAQUINAS_TELEFONO, MAQUINAS_EMAIL, MAQUINAS_NUMEROSERIE, MAQUINAS_FECHA, MAQUINAS_TIPOMAQUINA, MAQUINAS_ZONA},
                 null, null,
                 null, null, MAQUINAS_DIRECCION);

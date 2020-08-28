@@ -24,6 +24,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.buidemapp.Db_AppBuidem.Datasource;
@@ -31,6 +33,7 @@ import com.example.buidemapp.DialogCalendar;
 import com.example.buidemapp.MainActivity;
 import com.example.buidemapp.R;
 import com.example.buidemapp.ui.Interface.ICrud;
+import com.example.buidemapp.ui.Mapa.MapaFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -55,8 +58,8 @@ public class MaquinaFragment extends Fragment implements ICrud {
     //private Datasource _data;
     private Buidem_adapterM _adapter;
 
-    private static String[] from = new String[]{Datasource.MAQUINAS_NOMBRECLIENTE, Datasource.MAQUINAS_NUMEROSERIE, Datasource.MAQUINAS_FECHA};
-    private static int[] to = new int[]{R.id.edtNameM, R.id.edtNumeroSerie, R.id.edtFechaUlt};
+    private static String[] from = new String[]{Datasource.MAQUINAS_NOMBRECLIENTE, Datasource.MAQUINAS_NUMEROSERIE, Datasource.MAQUINAS_FECHA, Datasource.MAQUINAS_DIRECCION};
+    private static int[] to = new int[]{R.id.edtNameM, R.id.edtNumeroSerie, R.id.edtFechaUlt, R.id.edtDireM};
 
     private FloatingActionButton _addMachine;
     private MaquinaViewModel maquinaViewModel;
@@ -239,6 +242,10 @@ public class MaquinaFragment extends Fragment implements ICrud {
         _order = ORDER_BY.DATE;
         ApplyCursorInList(((MainActivity)getActivity())._data.OrderByDateLastRevision());
     }
+
+    public void StartFragmentMap(Maquina _machine){
+        ((MainActivity)getActivity()).ShowMap(_machine);
+    }
 }
 
 class Buidem_adapterM extends android.widget.SimpleCursorAdapter {
@@ -248,6 +255,7 @@ class Buidem_adapterM extends android.widget.SimpleCursorAdapter {
     private ImageView _imgTel;
     private ImageView _imgEmail;
     private ImageView _imgDelete;
+    private ImageView _imgMap;
 
     public Buidem_adapterM(Context context, int layout, Cursor c, String[] from, int[] to, int flags, MaquinaFragment fragment) {
         super(context, layout, c, from, to, flags);
@@ -274,6 +282,7 @@ class Buidem_adapterM extends android.widget.SimpleCursorAdapter {
 
         if(Machine.getString(Machine.getColumnIndexOrThrow(Datasource.MAQUINAS_TELEFONO)).isEmpty()){
             _imgTel.setImageResource(R.drawable.ic_local_phone_black_24dp_no);
+            _imgTel.setOnClickListener(null);
         }
         else{
             _imgTel.setImageResource(R.drawable.ic_local_phone_black_24dp);
@@ -293,6 +302,7 @@ class Buidem_adapterM extends android.widget.SimpleCursorAdapter {
 
         if(Machine.getString(Machine.getColumnIndexOrThrow(Datasource.MAQUINAS_EMAIL)).isEmpty()){
             _imgEmail.setImageResource(R.drawable.ic_email_black_24dp_no);
+            _imgEmail.setOnClickListener(null);
         }
         else{
             _imgEmail.setImageResource(R.drawable.ic_email_black_24dp);
@@ -314,6 +324,27 @@ class Buidem_adapterM extends android.widget.SimpleCursorAdapter {
                 }
             });
         }
+
+        _imgMap = (ImageView) view.findViewById(R.id._imgMapMachine);
+
+        _imgMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = (View) v.getParent();
+                ListView lv = (ListView) view.getParent();
+                int position = lv.getPositionForView(view);
+                Cursor Info = (Cursor) getItem(position);
+
+                Maquina _machine = new Maquina(String.valueOf(Info.getInt(Info.getColumnIndexOrThrow(Datasource.TODASTABLAS_ID))),Info.getString(Info.getColumnIndexOrThrow(Datasource.MAQUINAS_NOMBRECLIENTE)),
+                        Info.getString(Info.getColumnIndexOrThrow(Datasource.MAQUINAS_DIRECCION)),  Info.getString(Info.getColumnIndexOrThrow(Datasource.MAQUINAS_CODIGOPOSTAL)),
+                        Info.getString(Info.getColumnIndexOrThrow(Datasource.MAQUINAS_POBLACION)),  Info.getString(Info.getColumnIndexOrThrow(Datasource.MAQUINAS_TELEFONO)),
+                        Info.getString(Info.getColumnIndexOrThrow(Datasource.MAQUINAS_EMAIL)), Info.getString(Info.getColumnIndexOrThrow(Datasource.MAQUINAS_NUMEROSERIE)),
+                        Info.getString(Info.getColumnIndexOrThrow(Datasource.MAQUINAS_FECHA)), Info.getInt(Info.getColumnIndexOrThrow(Datasource.MAQUINAS_TIPOMAQUINA)),
+                        Info.getInt(Info.getColumnIndexOrThrow(Datasource.MAQUINAS_ZONA)));
+
+                _fragments.StartFragmentMap(_machine);
+            }
+        });
 
         _imgDelete = (ImageView) view.findViewById(R.id.mgDeleteM) ;
 

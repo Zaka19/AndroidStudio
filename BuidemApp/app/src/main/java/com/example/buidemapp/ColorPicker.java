@@ -9,14 +9,13 @@ import com.azeesoft.lib.colorpicker.ColorPickerDialog;
 
 public class ColorPicker {
 
-    public void ColorDialog(Context _context, final EditText _text, final TextView _color){
+    public void ColorDialog(Context _context, final EditText _text){
         ColorPickerDialog colorPickerDialog= ColorPickerDialog.createColorPickerDialog(_context,ColorPickerDialog.DARK_THEME);
         colorPickerDialog.setOnColorPickedListener(new ColorPickerDialog.OnColorPickedListener() {
             @Override
             public void onColorPicked(int color, String hexVal) {
-                _text.setText(hexVal);
-                _text.setTextColor(Color.parseColor(hexVal));
-                _color.setBackgroundColor(Color.parseColor(hexVal));
+                _text.setHint(hexVal);
+                _text.setBackgroundColor(Color.parseColor(hexVal));
             }
         });
         colorPickerDialog.setHexaDecimalTextColor(Color.parseColor("#ffffff"));
