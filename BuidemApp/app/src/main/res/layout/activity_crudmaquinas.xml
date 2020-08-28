@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="70dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/economica_bold"
+                    android:text="Nombre del cliente:"
+                    android:textSize="22dp" />
+
+                <EditText
+                    android:id="@+id/edtNameClientM"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/dsa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/economica_bold"
+                    android:text="Numero de serie:"
+                    android:textSize="22dp" />
+
+                <EditText
+                    android:id="@+id/edtNumSerieM"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="text" />
+
+                <TextView
+                    android:id="@+id/textviewdsa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/economica_bold"
+                    android:text="Telefono:"
+                    android:textSize="22dp" />
+
+                <EditText
+                    android:id="@+id/edtTelM"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="phone" />
+
+                <TextView
+                    android:id="@+id/saafsafsa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/economica_bold"
+                    android:text="Email:"
+                    android:textSize="22dp" />
+
+                <EditText
+                    android:id="@+id/edtEmailM"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textEmailAddress" />
+
+                <TextView
+                    android:id="@+id/texviex2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/economica_bold"
+                    android:text="Fecha de ultima version:"
+                    android:textSize="22dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edtDateFromM"
+                        android:layout_width="262dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:focusable="false"
+                        android:inputType="textPersonName" />
+
+                    <ImageView
+                        android:id="@+id/imgDateM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_date_range_black_24dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/cp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/economica_bold"
+                        android:text="Codigo postal:"
+                        android:textSize="22dp" />
+
+                    <EditText
+                        android:id="@+id/edtCPM"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+
+                    <TextView
+                        android:id="@+id/Poblacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/economica_bold"
+                        android:text="Poblacion:"
+                        android:textSize="22dp" />
+
+                    <EditText
+                        android:id="@+id/edtPoblacioM2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+
+                    <TextView
+                        android:id="@+id/gdv2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/economica_bold"
+                        android:text="Direccion:"
+                        android:textSize="22dp" />
+
+                    <EditText
+                        android:id="@+id/edtDireccionM3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvzonam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/economica_bold"
+                    android:text="Zona:"
+                    android:textSize="22dp" />
+
+                <Spinner
+                    android:id="@+id/edtZonaM"
+                    style="@style/styleTypeMachine"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/tvtmm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/economica_bold"
+                    android:text="Tipo de maquina:"
+                    android:textSize="22dp" />
+
+                <Spinner
+                    android:id="@+id/edtTipoMaquinaM"
+                    style="@style/styleTypeMachine"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/faAddM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_done_black_24dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/faDeleteM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_delete_black_24dp" />
+
+</RelativeLayout>

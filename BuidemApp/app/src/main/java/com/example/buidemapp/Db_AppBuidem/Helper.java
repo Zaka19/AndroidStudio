@@ -14,7 +14,8 @@ public class Helper extends SQLiteOpenHelper {
 
     private String CreateTableTiposMaquinas = "CREATE TABLE tipo_maquinas " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "nombreMaquina TEXT NOT NULL)";
+            "nombreMaquina TEXT NOT NULL," +
+            "colorTiposMaquina TEXT NOT NULL)";
 
     private String CreateTableMaquinas = "CREATE TABLE maquinas " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -26,10 +27,10 @@ public class Helper extends SQLiteOpenHelper {
             "email TEXT," +
             "numSerieMaquina TEXT NOT NULL," +
             "fecha TEXT," +
-            "tipus_maquinas TEXT NOT NULL," +
-            "zonasMaquina TEXT NOT NULL," +
-            "FOREIGN KEY(tipus_maquinas) REFERENCES tipo_maquinas(_id),"+
-            "FOREIGN KEY(zonasMaquina) REFERENCES zonas(_id)"+ ")";
+            "tipus_maquinas INTEGER NOT NULL," +
+            "zonasMaquina INTEGER NOT NULL," +
+            "FOREIGN KEY(tipus_maquinas) REFERENCES tipo_maquinas(_id) ON DELETE RESTRICT,"+
+            "FOREIGN KEY(zonasMaquina) REFERENCES zonas(_id) ON DELETE RESTRICT"+ ")";
 
     public Helper(Context context) {
         super(context, databaseName, null, Version);

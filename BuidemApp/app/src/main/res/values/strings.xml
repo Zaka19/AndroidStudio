@@ -6,4 +6,9 @@
     <string name="title_zonas">Zonas</string>
     <string name="title_tipomaquinas">Tipo de maquinas</string>
     <string name="title_gmaps">Mapa</string>
+
+    <!-- strings for types machine -->
+    <string name="name">Nombre:</string>
+    <string name="color">Color:</string>
+
 </resources>

@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="styleTypeMachine">
+        <item name="android:fontFamily">@font/economica</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">22dp</item>
+    </style>
+
 </resources>

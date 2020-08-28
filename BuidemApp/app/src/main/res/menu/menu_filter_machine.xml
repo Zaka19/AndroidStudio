@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nomClient"
+        android:title="Nombre Clientes" />
+
+    <item
+        android:id="@+id/direccio"
+        android:title="Direccion" />
+
+    <item
+        android:id="@+id/Fecha"
+        android:title="Fecha ultima revision" />
+</menu>
