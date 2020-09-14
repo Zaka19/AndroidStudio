@@ -84,10 +84,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun Create_Operation(numOrcharacter: String?){
         if(!tv!!.text.isEmpty()) {
-            if (numOrcharacter.equals(",") && !tv?.text.toString().contains(numOrcharacter!!)) {
+            if (numOrcharacter.equals(",") && !tv?.text.toString().contains(",")) {
                 tv!!.setText(tv!!.text.toString() + numOrcharacter)
             }
-            else
+            else if(!numOrcharacter.equals(","))
                 tv!!.setText(tv!!.text.toString() + numOrcharacter)
         }
         else
@@ -102,19 +102,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (action){
             actions.SUMAR->{
                 result = valorAnterior?.toFloat()!! + string.toFloat()
-                tv?.setText( result.toString());
+                tv?.setText( result.toString().replace(".", ","));
             }
             actions.RESTAR->{
                 result = valorAnterior?.toFloat()!! - string.toFloat()
-                tv?.setText( result.toString());
+                tv?.setText( result.toString().replace(".", ","));
             }
             actions.MULTIPLICAR->{
                 result = valorAnterior?.toFloat()!! * string.toFloat()
-                tv?.setText( result.toString());
+                tv?.setText( result.toString().replace(".", ","));
             }
             actions.DIVIDIR->{
                 result = valorAnterior?.toFloat()!! / string.toFloat()
-                tv?.setText( result.toString());
+                tv?.setText( result.toString().replace(".", ","));
             }
         }
     }
