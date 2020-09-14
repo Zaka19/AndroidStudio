@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">CalculadoraKotlin</string>
+
+    <string name="numero_0">0</string>
+    <string name="numero_1">1</string>
+    <string name="numero_2">2</string>
+    <string name="numero_3">3</string>
+    <string name="numero_4">4</string>
+    <string name="numero_5">5</string>
+    <string name="numero_6">6</string>
+    <string name="numero_7">7</string>
+    <string name="numero_8">8</string>
+    <string name="numero_9">9</string>
+
+    <string name="mas">+</string>
+    <string name="menos">-</string>
+    <string name="mult">X</string>
+    <string name="div">/</string>
+    <string name="igual">=</string>
+    <string name="coma">,</string>
+    <string name="c">C</string>
+</resources>
