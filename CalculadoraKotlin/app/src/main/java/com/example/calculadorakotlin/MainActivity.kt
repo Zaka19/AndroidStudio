@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun result() {
         var result: Float = 0f
-        var string = tv?.text.toString().replace(",",".")
+        var string = !tv?.text.toString().isEmpty ? tv?.text.toString().replace(",",".") : "0"
         valorAnterior = valorAnterior?.replace(",",".")
 
         when (action){
