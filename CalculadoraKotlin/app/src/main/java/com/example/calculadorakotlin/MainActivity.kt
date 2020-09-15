@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     fun result() {
         var result: Float = 0f
         var string = !tv?.text.toString().isEmpty ? tv?.text.toString().replace(",",".") : "0"
-        valorAnterior = valorAnterior?.replace(",",".")
+        valorAnterior = !valorAnterior.isEmpty() ? valorAnterior?.replace(",",".") : "0"
 
         when (action){
             actions.SUMAR->{
